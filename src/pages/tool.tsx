@@ -6,6 +6,10 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "@fontsource/amatic-sc";
 
 // @ts-ignore
@@ -20,7 +24,7 @@ const useStyles = makeStyles(() => ({
 
 const Tool = () => {
   const classes = useStyles();
-  const [names, setNames] = useState(Array(4).fill(''))
+  const [names, setNames] = useState(Array(7).fill(''))
   const [result, setResult] = useState(Array());
 
   function shuffle() {
@@ -66,8 +70,16 @@ const Tool = () => {
 
   return (
     <Container className={classes.inputContiner}>
-      <Card sx={{ minWidth: 275 }}>
-        <CardContent>
+
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>使い方と注意点</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
           <Typography variant="subtitle1">
             【使い方】
           </Typography>
@@ -85,9 +97,8 @@ const Tool = () => {
             ・空欄がないか（多かったら-で消してください）<br/>
             ・名前の重複がないか（同じお名前の方は判別できるようにしてください）
           </Typography>
-          
-        </CardContent>
-      </Card>
+        </AccordionDetails>
+      </Accordion>
       <div className={classes.inputContiner}>
         {names.map((name, i) => {
           return (<TextField value={name} onChange={e => change(e.target.value, i)} />)
